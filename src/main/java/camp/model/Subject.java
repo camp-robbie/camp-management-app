@@ -3,6 +3,8 @@ package camp.model;
 
 import camp.enums.SubjectType;
 
+import java.util.Objects;
+
 public class Subject {
     private String subjectId;
     private String subjectName;
@@ -12,6 +14,10 @@ public class Subject {
         this.subjectId = subjectId;
         this.subjectName = subjectName;
         this.subjectType = subjectType;
+    }
+
+    public boolean isMandatory() {
+        return Objects.equals(SubjectType.MANDATORY, this.subjectType);
     }
 
     // Getter

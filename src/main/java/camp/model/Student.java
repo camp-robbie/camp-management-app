@@ -1,17 +1,36 @@
 package camp.model;
 
 
+import camp.enums.StudentStatus;
+import camp.enums.SubjectType;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
     private String studentId;
     private String studentName;
+    private StudentStatus status;
     private final List<Subject> selectSubjects;
 
-    public Student(String studentId, String studentName, List<Subject> selectSubjects) {
-        this.studentId = studentId;
+    public Student(String studentName, StudentStatus status, List<Subject> selectSubjects) {
         this.studentName = studentName;
         this.selectSubjects = selectSubjects;
+        this.status = status;
+    }
+
+    public void updateStatus(StudentStatus status) {
+        this.status = status;
+    }
+
+    public List<Subject> getMandatorySubjects() {
+        List<Subject> mandatorySubjects = new ArrayList<>();
+        for (Subject selectSubject : selectSubjects) {
+            if (SubjectType.MANDATORY == selectSubject.getSubjectType()) {
+                mandatorySubjects.add(selectSubject);
+            }
+        }
+        return mandatorySubjects;
     }
 
     // Getter
@@ -21,6 +40,10 @@ public class Student {
 
     public String getStudentName() {
         return studentName;
+    }
+
+    public StudentStatus getStatus() {
+        return status;
     }
 
     public List<Subject> getSelectSubjects() {
